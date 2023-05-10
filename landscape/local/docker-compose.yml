@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  pgMaster:
+    restart: always
+    image: sameersbn/postgresql:9.6-4
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    environment:
+      - DEBUG=false
+
+      - DB_USER=dbuser
+      - DB_PASS=dbpass
+      - DB_NAME=covid
+
+      - DB_UNACCENT=false
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data-master:/var/lib/postgresql

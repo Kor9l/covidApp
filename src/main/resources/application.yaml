@@ -1,0 +1,43 @@
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  application:
+    name: Covid
+  datasource:
+    url: jdbc:postgresql://localhost:5432/covid
+    driverClassName: org.postgresql.Driver
+    username: ${PGUSER:dbuser}
+    password: ${PGPASSWORD:dbpass}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+  jpa:
+    show-sql: false
+    hibernate:
+      connection:
+        provider_class: org.hibernate.hikaricp.internal.HikariCPConnectionProvider
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc.batch_size: 25
+        order_inserts: true
+        order_updates: true
+        generate_statistics: false
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log: "changelog-master.yml"
+    contexts: dev
+
+
+covid19api:
+  url: ${COVID19_API_URL:https://api.covid19api.com}

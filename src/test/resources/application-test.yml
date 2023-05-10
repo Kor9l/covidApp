@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/covid
+
+
+covid19api:
+  url: ${COVID19_API_URL:http://localhost:8088}
